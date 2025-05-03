@@ -62,7 +62,6 @@ export function Chat({
           {messages.map((message, index) => (
             <PreviewMessage
               key={index}
-              chatId={id}
               role={message.role}
               content={message.content}
             />

@@ -6,11 +6,9 @@ import { ReactNode } from "react";
 import { Markdown } from "@/app/(protected)/_components/markdown";
 import { BotIcon, UserIcon } from "lucide-react";
 export const Message = ({
-  chatId,
   role,
   content,
 }: {
-  chatId: string;
   role: string;
   content: string | ReactNode;
 }) => {
