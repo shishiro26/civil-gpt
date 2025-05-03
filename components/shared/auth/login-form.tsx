@@ -46,7 +46,7 @@ export const LoginForm = () => {
 
   useEffect(() => {
     form.setFocus("email");
-  }, [form.setFocus]);
+  }, [form, form.setFocus]);
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");

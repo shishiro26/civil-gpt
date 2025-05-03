@@ -1,7 +1,7 @@
 import { Message, streamText } from "ai";
 import { google } from "@ai-sdk/google";
 
-export const maxDuration = 60 * 1000;
+export const maxDuration = 60
 
 export async function POST(request: Request) {
   const { messages }: { id: string; messages: Array<Message> } =

@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import React, { memo } from "react";
 import ReactMarkdown from "react-markdown";
@@ -5,6 +6,7 @@ import remarkGfm from "remark-gfm";
 
 const NonMemoizedMarkdown = ({ children }: { children: string }) => {
   const components = {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     code: ({ node, inline, className, children, ...props }: any) => {
       const match = /language-(\w+)/.exec(className || "");
       return !inline && match ? (
@@ -23,6 +25,7 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
         </code>
       );
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     ol: ({ node, children, ...props }: any) => {
       return (
         <ol className="list-decimal list-outside ml-4" {...props}>
@@ -30,6 +33,7 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
         </ol>
       );
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     li: ({ node, children, ...props }: any) => {
       return (
         <li className="py-1" {...props}>
@@ -37,6 +41,7 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
         </li>
       );
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     ul: ({ node, children, ...props }: any) => {
       return (
         <ul className="list-decimal list-outside ml-4" {...props}>
@@ -44,6 +49,7 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
         </ul>
       );
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     strong: ({ node, children, ...props }: any) => {
       return (
         <span className="font-semibold" {...props}>
@@ -51,6 +57,7 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
         </span>
       );
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     a: ({ node, children, ...props }: any) => {
       return (
         <Link
@@ -74,5 +81,5 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
 
 export const Markdown = memo(
   NonMemoizedMarkdown,
-  (prevProps, nextProps) => prevProps.children === nextProps.children,
+  (prevProps, nextProps) => prevProps.children === nextProps.children
 );

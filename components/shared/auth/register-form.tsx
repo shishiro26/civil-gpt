@@ -37,7 +37,7 @@ export const RegisterForm = () => {
 
   useEffect(() => {
     form.setFocus("name");
-  }, [form.setFocus]);
+  }, [form, form.setFocus]);
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");

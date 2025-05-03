@@ -38,7 +38,7 @@ export const NewPasswordForm = () => {
 
   useEffect(() => {
     form.setFocus("password");
-  }, [form.setFocus]);
+  }, [form, form.setFocus]);
 
   const onSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
     setError("");
