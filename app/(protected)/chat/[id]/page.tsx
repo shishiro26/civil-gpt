@@ -3,7 +3,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import { auth } from "@/auth";
 import { Chat as PreviewChat } from "@/components/shared/chat/chat";
-import { Message } from "ai"; // Ensure you import the correct Message type
+import { Message } from "ai";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -23,7 +23,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const messages: Message[] =
     chatFromDb.messages
       ?.filter(
-        (messageStr): messageStr is string => typeof messageStr === "string"
+        (messageStr: unknown): messageStr is string =>
+          typeof messageStr === "string"
       )
       .map((messageStr: string) => {
         try {
