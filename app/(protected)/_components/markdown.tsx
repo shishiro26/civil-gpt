@@ -1,13 +1,41 @@
-
 import Link from "next/link";
 import React, { memo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import type { Components } from "react-markdown";
+import type { Element } from "hast";
+
+interface CodeProps {
+  node?: Element;
+  inline?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+interface ListProps {
+  node?: Element;
+  children?: React.ReactNode;
+}
+
+interface ListItemProps {
+  node?: Element;
+  children?: React.ReactNode;
+}
+
+interface StrongProps {
+  node?: Element;
+  children?: React.ReactNode;
+}
+
+interface LinkProps {
+  node?: Element;
+  children?: React.ReactNode;
+  href?: string;
+}
 
 const NonMemoizedMarkdown = ({ children }: { children: string }) => {
-  const components = {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    code: ({ node, inline, className, children, ...props }: any) => {
+  const components: Components = {
+    code: ({ inline, className, children, ...props }: CodeProps) => {
       const match = /language-(\w+)/.exec(className || "");
       return !inline && match ? (
         <pre
@@ -25,42 +53,38 @@ const NonMemoizedMarkdown = ({ children }: { children: string }) => {
         </code>
       );
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    ol: ({ node, children, ...props }: any) => {
+    ol: ({ children, ...props }: ListProps) => {
       return (
         <ol className="list-decimal list-outside ml-4" {...props}>
           {children}
         </ol>
       );
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    li: ({ node, children, ...props }: any) => {
+    li: ({ children, ...props }: ListItemProps) => {
       return (
         <li className="py-1" {...props}>
           {children}
         </li>
       );
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    ul: ({ node, children, ...props }: any) => {
+    ul: ({ children, ...props }: ListProps) => {
       return (
-        <ul className="list-decimal list-outside ml-4" {...props}>
+        <ul className="list-disc list-outside ml-4" {...props}>
           {children}
         </ul>
       );
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    strong: ({ node, children, ...props }: any) => {
+    strong: ({ children, ...props }: StrongProps) => {
       return (
         <span className="font-semibold" {...props}>
           {children}
         </span>
       );
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    a: ({ node, children, ...props }: any) => {
+    a: ({ children, href, ...props }: LinkProps) => {
       return (
         <Link
+          href={href || "#"}
           className="text-blue-500 hover:underline"
           target="_blank"
           rel="noreferrer"

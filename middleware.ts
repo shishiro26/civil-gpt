@@ -17,6 +17,12 @@ export default auth((req) => {
   const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
+  if (nextUrl.pathname === "/") {
+    // Redirect root path to the default login redirect
+    const url = new URL(DEFAULT_LOGIN_REDIRECT, nextUrl.origin);
+    return Response.redirect(url);
+  }
+
   if (isApiAuthRoute) return;
 
   if (isAuthRoute) {
