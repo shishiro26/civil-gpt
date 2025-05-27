@@ -35,7 +35,9 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           return null;
         }
       })
-      .filter((messageObj): messageObj is Message => messageObj !== null) ?? [];
+      .filter(
+        (messageObj: unknown): messageObj is Message => messageObj !== null
+      ) ?? [];
 
   return (
     <>
